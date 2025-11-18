@@ -1,180 +1,128 @@
-# BugHeist Platform Features
+# Banned Apps 
 
-## 🐛 Core Features
+This repository contains the standalone **Banned Apps** Django application, extracted from the BLT project to improve maintainability, modularity, and ownership. It provides:
 
-### Bug Bounty Platform
-- **Bug Reporting System**
-  - Detailed bug submission forms
-  - File attachment support
-  - Bug categorization and tagging
-  - Severity level classification
-  - Bug status tracking
-  - Comment and discussion system
+- A `BannedApp` Django model
+- Admin integration
+- JSON search API endpoint
+- HTML template for displaying banned applications
+- Django migrations
+- Fixtures
+- Clean separation from the BLT monorepo
 
-- **Bounty Management**
-  - Bounty creation and management
-  - Bidding system for bug fixes
-  - Bounty payout processing
-  - Payment tracking and history
-  - Multiple payment method support
+This module preserves commit history extracted from the BLT repository using git-filter-repo.
 
-### User Management
-- **User Profiles**
-  - Customizable user profiles
-  - Achievement badges
-  - Skill showcase
-  - Activity history
-  - Social media integration
 
-- **Authentication & Security**
-  - Multi-factor authentication
-  - OAuth integration (GitHub, Google)
-  - IP tracking and reporting
-  - Account security settings
-  - Privacy controls
+---
 
-### Community Features
-- **Social Interaction**
-  - Real-time messaging
-  - Team collaboration
-  - Friend system
-  - Activity feed
-  - Comment and discussion threads
+## 🚀 Features
 
-- **Leaderboards & Gamification**
-  - Global leaderboard
-  - Monthly rankings
-  - Team leaderboards
-  - Achievement system
-  - Point-based rewards
+### ✔ BannedApp Model  
+Tracks information about banned applications:
 
-## 🎯 Specialized Features
+- App name  
+- App type  
+- Country  
+- Reason for ban  
+- Ban date  
+- Source URL  
+- Active status  
 
-### Bug Hunting Tools
-- **Bug Scanner**
-  - OWASP compliance checking
-  - Similarity scanning
-  - Domain analysis
-  - IP tracking
-  - Automated vulnerability detection
+### ✔ Views  
+- Template view: displays a simple banned apps page  
+- JSON endpoint: `/banned_apps/search/?country=<query>`  
 
-- **GitHub Integration**
-  - Issue tracking
-  - Pull request analysis
-  - Repository integration
-  - Issue synchronization
-  - Code review tools
+### ✔ Admin Integration  
+The app registers `BannedApp` under Django admin with basic columns.
 
-### Organization Features
-- **Team Management**
-  - Team creation and management
-  - Role-based access control
-  - Team challenges
-  - Team statistics
-  - Member management
+### ✔ Fixtures & Migrations  
+A complete database migration and fixture file (`banned_apps.json`) are included.
 
-- **Project Management**
-  - Project tracking
-  - Bug assignment
-  - Progress monitoring
-  - Project analytics
-  - Custom project settings
+---
 
-### Educational Resources
-- **Learning Platform**
-  - Educational content
-  - Tutorials and guides
-  - Best practices
-  - Security guidelines
-  - Training materials
+## 📦 Installation
 
-- **Hackathons & Challenges**
-  - Hackathon hosting
-  - Challenge creation
-  - Competition management
-  - Results tracking
-  - Prize distribution
+Install directly from GitHub in your Django project:
 
-## 🛠️ Technical Features
+```bash
+pip install -e git+https://github.com/Nachiket-Roy/banned-apps.git#egg=banned_apps
+```
+## Django Setup
 
-### Platform Infrastructure
-- **Real-time Features**
-  - WebSocket support
-  - Live notifications
-  - Real-time chat
-  - Instant updates
-  - Video conferencing
+Add the app to your INSTALLED_APPS:
 
-- **API & Integration**
-  - RESTful API
-  - Third-party integrations
-  - Webhook support
-  - Custom integrations
-  - API documentation
+```python
+INSTALLED_APPS = [
+    ...
+    "banned_apps",
+]
+```
 
-### Analytics & Reporting
-- **Statistics & Analytics**
-  - User statistics
-  - Bug tracking metrics
-  - Project analytics
-  - Performance monitoring
-  - Custom reports
+Include its URL routes:
 
-- **Dashboard & Monitoring**
-  - Custom dashboards
-  - Status monitoring
-  - Performance tracking
-  - System health checks
-  - Usage analytics
+```bash
+from django.urls import include, path
 
-## 🌐 Additional Features
+urlpatterns = [
+    path("banned_apps/", include("banned_apps.urls")),
+]
 
-### Content Management
-- **Blog & Documentation**
-  - Blog platform
-  - Documentation system
-  - Knowledge base
-  - FAQ management
-  - Content versioning
+```
 
-- **Search & Discovery**
-  - Advanced search
-  - Filtering options
-  - Tag-based navigation
-  - Content categorization
-  - Search history
+# Project Structure 
 
-### Security & Compliance
-- **Security Features**
-  - IP tracking
-  - Banned apps management
-  - Security scanning
-  - Compliance checking
-  - Privacy controls
+```pgsql
+banned_apps/
+  ├── __init__.py
+  ├── admin.py
+  ├── apps.py
+  ├── fixtures/
+  │     └── banned_apps.json
+  ├── migrations/
+  │     └── 0232_bannedapp.py
+  ├── models.py
+  ├── templates/
+  │     ├── banned_apps/
+  │     │     └── banned_apps.html
+  │     └── includes/
+  │           ├── header.html
+  │           └── sidenav.html
+  ├── urls.py
+  └── views.py
+```
 
-- **Legal & Compliance**
-  - Terms of service
-  - Privacy policy
-  - Trademark management
-  - Legal documentation
-  - Compliance tracking
+## Running Migrations
 
-## 🚀 Future Features (Roadmap)
-- Enhanced mobile support
-- Advanced AI-powered bug detection
-- Expanded payment options
-- Improved collaboration tools
-- Advanced analytics dashboard
-- Extended API capabilities
-- Enhanced security features
-- More integration options
+After installation:
 
-## 🔧 Technical Stack
-- Backend: Django
-- Frontend: Tailwind CSS
-- Database: SQLite/PostgreSQL
-- Real-time: WebSocket
-- Authentication: OAuth2
-- Payment Processing: Multiple providers
-- API: RESTful
-- Deployment: Docker support 
+```bash
+python manage.py migrate banned_apps
+```
+
+To load sample data:
+```bash
+python manage.py loaddata banned_apps
+```
+
+## Development
+
+Clone the repository:
+```bash
+git clone https://github.com/Nachiket-Roy/banned-apps.git
+cd banned-apps
+```
+
+Install dependencies:
+```bash
+pip install -e .
+```
+
+## Contributing
+
+1. Fork the repo
+
+2. Create a feature branch
+
+3. Submit a PR
+
+4. Follow Django coding conventions
