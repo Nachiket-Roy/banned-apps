@@ -64,6 +64,7 @@ Include its URL routes:
 from django.urls import include, path
 
 urlpatterns = [
+    ...
     path("banned_apps/", include("banned_apps.urls")),
 ]
 
