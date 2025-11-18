@@ -5,8 +5,10 @@ description = "Standalone Django app for managing banned applications."
 authors = ["OWASP <example@gmail.com>"]
 license = "MIT"
 readme = "README.md"
+
 packages = [
-    { include = "banned_apps" }
+    { include = "banned_apps" },
+    { include = "banned_apps/migrations" }
 ]
 
 [tool.poetry.dependencies]
