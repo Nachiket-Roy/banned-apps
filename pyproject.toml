@@ -2,7 +2,7 @@
 name = "banned_apps"
 version = "0.1.0"
 description = "Standalone Django app for managing banned applications."
-authors = [""]
+authors = ["OWASP <example@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [
